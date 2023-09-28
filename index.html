@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      *{
+        padding:0;
+        margin: 0;
+        box-sizing: border-box;
+      }
+      main{
+        width: 70%;
+        height: 500px;
+        margin: auto;
+        margin-top: 100px;
+        box-shadow: 0px 0px 3px grey;
+        position: relative;
+      }
+      .slider{
+        position: absolute;
+        height:100% ;
+        width:100%
+      }
+      .nav{
+        text-align: center;
+        margin-top: 15px;
+      }
+      .nav button{
+        font-size: 28px;
+        padding:5px ;
+        background-color: rgb(204, 211, 8);
+      }
+
+
+
+
+
+    </style>
+</head>
+<body>
+  <main>
+    <img src="https://picsum.photos/id/237/1000/500" class="slider">
+    <img src="https://picsum.photos/id/238/1000/500" class="slider">
+    <img src="https://picsum.photos/id/240/1000/500" class="slider">
+    <img src="https://picsum.photos/id/241/1000/500" class="slider">
+    <img src="https://picsum.photos/id/242/1000/500" class="slider">
+    <img src="https://picsum.photos/id/243/1000/500" class="slider">
+  </main>
+  <div class="nav">
+    <button onclick="goPrev()">
+      Prev
+    </button>
+    <button onclick="goNext()">
+      Next
+    </button>
+    <button onclick="autoRotate()">
+      Auto
+    </button>
+  </div>
+  
+
+
+<script>
+  const slider = document.querySelectorAll(".slider")
+  var counter =0;
+  var currentIndex=0;
+  
+
+  let autoRotateInterval;
+  slider.forEach(
+    (slider,index) => {
+      slider.style.left = `${index * 100}%`
+    }
+  )
+  const sliderImage = () => {
+    slider.forEach(
+      (slider) => {
+        slider.style.transform = `translateX(-${counter*100}%)`
+      }
+    )
+  }
+  function autoRotate()  {
+  currentIndex = (currentIndex + 1) % slider.length;
+  goNext(currentIndex);
+
+autoRotateInterval = setInterval(autoRotate, 4000);
+  }
+
+  
+
+  const goNext = () =>{
+    if(counter==slider.length -1){
+      counter=0;
+      sliderImage();
+    }
+    else
+    counter++;
+    sliderImage();
+  } 
+    const goPrev = () =>{
+    if(counter==0){
+      counter=slider.length -1;
+      sliderImage();
+    }else
+    counter--;
+    sliderImage();
+  }
+
+
+  
+</script>
+</body>
+</html>
